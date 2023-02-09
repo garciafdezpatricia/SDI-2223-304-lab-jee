@@ -6,10 +6,7 @@ public class Product {
     private String image;
     private float price;
 
-    public Product(String name, String image, float price) {
-        this.name = name;
-        this.image = image;
-        this.price = price;
+    public Product() {
     }
 
     public String getName() {
