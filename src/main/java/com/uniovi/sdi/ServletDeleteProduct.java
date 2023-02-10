@@ -4,14 +4,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
-@WebServlet(name = "ServletShoppingCart", value = "/AddToShoppingCart")
-public class ServletShoppingCart extends HttpServlet {
-
+@WebServlet(name = "ServletDeleteProduct", value = "/DeleteProduct")
+public class ServletDeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // obtener la sesion del request
         HttpSession session = request.getSession();
         // de la sesion obtener el carrito y hacer un cast a hashmap
@@ -25,36 +24,30 @@ public class ServletShoppingCart extends HttpServlet {
             // establecer el valor del nuevo carrito al atributo cart de la sesion
             request.getSession().setAttribute("cart", cart);
         }
-
         // sacar el nombre del producto de la request
         String product = request.getParameter("product");
-        // si el producto no es nulo, añadirlo al carrito
+        // si el producto no es nulo, borrarlo del carrito
         if (product != null) {
-            addToShoppingCart(cart, product);
+            deleteFromShoppingCart(cart, product);
         }
-        // Retornar la vista con parámetro "selectedItems"
+        // retornar el carrito modificado
         request.setAttribute("selectedItems", cart);
         getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
-
     }
 
-    private void addToShoppingCart(HashMap<String, Integer> cart, String productKey){
-        if (cart.get(productKey) == null)
-            cart.put(productKey, Integer.valueOf(1));
+    private void deleteFromShoppingCart(HashMap<String, Integer> cart, String productKey){
+        if (cart.get(productKey) > 0){
+            int units = cart.get(productKey);
+            cart.put(productKey, Integer.valueOf(units - 1));
+        }
         else{
-            int productCount = (Integer) cart.get(productKey).intValue();
-            cart.put(productKey, Integer.valueOf(productCount + 1));
+            cart.remove(productKey);
         }
+
     }
 
-    private String shoppingCartToHtml(HashMap<String,Integer> cart){
-        String shoppingCartToHtml = "";
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        for (String key : cart.keySet()){
-            shoppingCartToHtml += "<p>[" + key + "]," + cart.get(key) + " unidades</p>";
-        }
-        return shoppingCartToHtml;
     }
-
-
 }

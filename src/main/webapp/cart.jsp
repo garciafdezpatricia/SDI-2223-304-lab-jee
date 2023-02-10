@@ -34,9 +34,9 @@
 <div class="container" id="main-container">
   <h2>Vista Carrito</h2>
   <ul>
-    <c:forEach var="item" items="${selectedItems}">
+    <c:forEach var="product" items="${selectedItems}">
       <tr>
-        <li>${item.key} - ${item.value} </li>
+        <li>${product.key} - ${product.value} <a href="DeleteProduct?product=<c:out value="${product.key}"/>">Borrar</a></li>
       </tr>
     </c:forEach>
   </ul>
