@@ -13,7 +13,7 @@ public class ServletShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // obtener la sesion del requesr
+        // obtener la sesion del request
         HttpSession session = request.getSession();
         // de la sesion obtener el carrito y hacer un cast a hashmap
         HashMap<String, Integer> cart =
