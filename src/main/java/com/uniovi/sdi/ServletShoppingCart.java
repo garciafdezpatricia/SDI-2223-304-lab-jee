@@ -35,7 +35,6 @@ public class ServletShoppingCart extends HttpServlet {
         // Retornar la vista con parámetro "selectedItems"
         request.setAttribute("selectedItems", cart);
         getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
-
     }
 
     private void addToShoppingCart(HashMap<String, Integer> cart, String productKey){

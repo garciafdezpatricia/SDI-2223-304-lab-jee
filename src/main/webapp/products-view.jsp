@@ -28,6 +28,7 @@
             <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="admin.jsp">Administrar productos</a></li>
             <li class="nav-item>"><a class="nav-link" href="products">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="comment.jsp">Comentarios</a> </li>
         </ul>
         <div class="nav navbar-right">
             <div class="center-block">
@@ -42,13 +43,9 @@
     <h2>Vista Productos</h2>
     <ul>
         <c:forEach var="item" begin="0" items="${storeProducts}">
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <div>
-                    <img src="<c:out value="${item.image}"/>"/>
-                    <div><c:out value="${item.name}"/></div>
-                    <div><c:out value="${item.price}"/> €</div>
-                </div>
-            </div>
+                    <li> <img src="<c:out value="${item.image}"/>"/>
+                    <c:out value="${item.name}"/>
+                    <c:out value="${item.price}"/> €<br></li>
         </c:forEach>
     </ul>
     <a href="index.jsp">Volver</a>

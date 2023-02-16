@@ -36,7 +36,8 @@ public class ServletDeleteProduct extends HttpServlet {
     }
 
     private void deleteFromShoppingCart(HashMap<String, Integer> cart, String productKey){
-        if (cart.get(productKey) > 0){
+        // si hay mas de un producto decrementar las unidades, si no eliminarlo del carrito
+        if (cart.get(productKey) > 1){
             int units = cart.get(productKey);
             cart.put(productKey, Integer.valueOf(units - 1));
         }
